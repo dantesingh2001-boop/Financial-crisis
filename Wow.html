@@ -1,0 +1,431 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b0b0b">
+<title>FINANCIAL CRISIS™ — Are You Cooked?</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg:#0b0b0b;
+  --panel:#141414;
+  --border:#303030;
+  --green:#c6ff00;
+  --red:#ff3b4f;
+  --white:#f5f5f0;
+  --muted:#99998e;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--white);
+  font-family:'Space Grotesk',sans-serif;
+  background-image:radial-gradient(#ffffff10 1px,transparent 1px);
+  background-size:20px 20px;
+}
+button{font:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid var(--green);outline-offset:4px}
+.top{
+  padding:17px 5%;border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  background:#0b0b0bf0;position:sticky;top:0;z-index:5;
+}
+.logo{font-size:14px;font-weight:800;letter-spacing:-.5px}
+.logo span{color:var(--green)}
+.live{font:10px 'DM Mono',monospace;color:var(--green)}
+.live:before{content:'● ';animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.25}}
+.wrap{width:min(720px,92%);margin:auto;padding:45px 0 60px}
+.eyebrow{font:11px 'DM Mono',monospace;letter-spacing:2px;color:var(--green);text-transform:uppercase}
+h1{font-size:clamp(48px,10vw,86px);line-height:.9;letter-spacing:-5px;margin:18px 0}
+.outline{color:transparent;-webkit-text-stroke:1.5px var(--green)}
+.intro{font-size:14px;color:#b8b8ad;line-height:1.8;max-width:490px}
+.stamp{display:inline-block;border:1px solid var(--red);color:var(--red);padding:7px 10px;font:10px 'DM Mono',monospace;transform:rotate(-2deg);margin:14px 0}
+.panel{border:1px solid var(--border);background:var(--panel);border-radius:12px;padding:clamp(18px,5vw,30px);margin-top:24px;box-shadow:7px 7px 0 #000}
+.panelhead{display:flex;justify-content:space-between;align-items:center;gap:12px;font:11px 'DM Mono',monospace;color:var(--muted);margin-bottom:16px}
+.meter{height:9px;background:#303027;border-radius:9px;overflow:hidden;margin:12px 0}
+.meterfill{height:100%;width:0;background:var(--green);transition:width .4s}
+.meterlabel{display:flex;justify-content:space-between;font:10px 'DM Mono',monospace;color:var(--muted)}
+.qtitle{font-size:clamp(24px,5vw,34px);letter-spacing:-1.5px;margin:12px 0}
+.qsub{color:var(--muted);font-size:13px;line-height:1.7;margin-bottom:23px}
+.options{display:grid;gap:10px}
+.option{
+  text-align:left;display:flex;gap:13px;align-items:center;width:100%;
+  padding:16px;border:1px solid var(--border);border-radius:8px;
+  color:var(--white);background:#1c1c19;transition:.16s;
+}
+.option:hover{border-color:var(--green);transform:translateX(3px)}
+.option:active{transform:scale(.99)}
+.letter{display:grid;place-items:center;width:30px;height:30px;flex-shrink:0;border:1px solid #45453c;color:var(--green);font:12px 'DM Mono',monospace}
+.optiontext{font-size:13px;line-height:1.5}
+.feedback{display:none;margin-top:18px;padding:16px;border:1px solid #474733;background:#202018;border-radius:8px;line-height:1.7;font-size:13px}
+.feedback.show{display:block;animation:pop .25s ease}
+.feedback strong{color:var(--green)}
+@keyframes pop{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.btn{
+  display:block;width:100%;padding:16px;margin-top:18px;border:0;border-radius:6px;
+  color:#080808;background:var(--green);font-weight:800;font-size:13px;
+  transition:.15s;
+}
+.btn:hover{filter:brightness(.9);transform:translateY(-1px)}
+.btn.secondary{color:var(--white);background:#262622;border:1px solid var(--border)}
+.btn:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.hidden{display:none!important}
+.ticker{margin-top:18px;color:var(--muted);font:10px 'DM Mono',monospace;line-height:2}
+.result{text-align:center}
+.skull{font-size:70px;animation:shake .5s infinite alternate;display:inline-block}
+@keyframes shake{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
+.verdict{color:var(--red);font-size:clamp(38px,9vw,70px);line-height:.95;letter-spacing:-3px;margin:20px 0}
+.bigscore{font:clamp(60px,13vw,100px) 'DM Mono',monospace;color:var(--green);margin:12px 0}
+.badge{display:inline-block;padding:7px 11px;background:#291317;color:#ff7582;border:1px solid #73323a;font:10px 'DM Mono',monospace}
+.report{text-align:left;margin-top:24px}
+.report h3{font-size:16px;margin:0 0 12px}
+.report p{font-size:13px;line-height:1.8;color:#c2c2b8}
+.reason{padding:14px 0;border-bottom:1px solid var(--border)}
+.reason:last-child{border-bottom:0}
+.reason b{color:var(--green);font-size:13px}
+.reason p{margin:6px 0 0}
+.disclaimer{font-size:10px;line-height:1.7;color:#77776e;margin-top:22px}
+footer{padding:20px 5%;border-top:1px solid var(--border);text-align:center;color:#6e6e65;font:10px 'DM Mono',monospace}
+.flash{animation:flash .35s}
+@keyframes flash{50%{background:#361015}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">FINANCIAL <span>CRISIS™</span></div>
+  <div class="live">FINANCIAL STABILITY: QUESTIONABLE</div>
+</header>
+
+<main class="wrap">
+  <section id="intro">
+    <div class="eyebrow">Independent Institute of Financial Nonsense</div>
+    <h1>ARE YOU<br><span class="outline">COOKED?</span></h1>
+    <p class="intro">
+      Welcome to the Broke-O-Meter. Answer eight deeply unnecessary questions
+      and receive a completely unserious financial report explaining why
+      your imaginary financial future is in shambles.
+    </p>
+    <div class="stamp">⚠ NOT APPROVED BY ANY ECONOMIST</div>
+
+    <div class="panel">
+      <div class="panelhead"><span>YOUR FINANCIAL DESTINY</span><span>CLASSIFIED</span></div>
+      <h2 style="font-size:24px;margin:0">The numbers are looking suspicious.</h2>
+      <p class="qsub">Our highly questionable algorithm is ready to judge your answers. Your money is not connected to this website. No actual financial information is collected.</p>
+      <div class="meter"><div class="meterfill" style="width:7%"></div></div>
+      <div class="meterlabel"><span>HOPE</span><span>DOOM LOADING...</span></div>
+      <button class="btn" id="start">INITIATE FINANCIAL DAMAGE →</button>
+    </div>
+    <div class="ticker">WARNING: SIDE EFFECTS MAY INCLUDE LAUGHTER AND QUESTIONABLE ACCOUNTING METAPHORS.</div>
+  </section>
+
+  <section id="quiz" class="hidden">
+    <div class="eyebrow">Case file #000-HELP</div>
+    <h2 style="font-size:34px;letter-spacing:-2px;margin:12px 0">The interrogation.</h2>
+    <div class="panel">
+      <div class="panelhead"><span id="qnum">QUESTION 01 / 08</span><span id="percent">0% ANALYZED</span></div>
+      <div class="meter"><div class="meterfill" id="progress"></div></div>
+      <div class="meterlabel"><span>FINANCIAL HOPE</span><span>IMPENDING NONSENSE</span></div>
+      <h3 class="qtitle" id="question"></h3>
+      <p class="qsub" id="subtitle"></p>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback" aria-live="polite"></div>
+      <button class="btn hidden" id="next">NEXT QUESTION →</button>
+    </div>
+    <div class="ticker" id="ticker">SYSTEM LOG: Waiting for suspicious financial activity...</div>
+  </section>
+
+  <section id="result" class="hidden">
+    <div class="eyebrow">Analysis complete / Case closed</div>
+    <div class="panel result">
+      <div class="skull">💀</div>
+      <div class="badge">OFFICIAL-ISH DIAGNOSIS</div>
+      <h2 class="verdict">FINANCIALLY<br>COOKED.</h2>
+      <p class="qsub">After extensive calculations involving absolutely no real economics...</p>
+      <div class="eyebrow">YOUR BROKE-O-METER SCORE</div>
+      <div class="bigscore" id="score">100%</div>
+      <div class="meter"><div class="meterfill" style="width:100%;background:var(--red)"></div></div>
+      <div class="meterlabel"><span>YOUR EXCUSES</span><span>OUR QUESTIONABLE SCIENCE</span></div>
+      <p style="font-size:12px;color:var(--muted)">Congratulations. The algorithm has reached its predetermined conclusion.</p>
+      <div class="report">
+        <h3>📉 THE FINANCIAL DAMAGE REPORT</h3>
+        <div id="reasons"></div>
+        <div class="reason">
+          <b>THE FINAL MATHEMATICAL PROOF</b>
+          <p>
+            You made decisions. Decisions have consequences.
+            Consequences have consequences.
+            Therefore, according to the Institute of Made-Up Economics,
+            your financial destiny is BROKE.
+            <br><br>
+            <strong style="color:var(--red)">Q.E.D. = Quite Extremely Destitute.</strong>
+          </p>
+        </div>
+      </div>
+      <button class="btn" id="share">COPY MY FINANCIAL REPORT 📋</button>
+      <button class="btn secondary" id="restart">RETAKE THE TEST (COPE AGAIN)</button>
+      <div class="disclaimer">
+        SATIRE NOTICE: This is a comedy quiz, not financial advice.
+        The score is fictional and does not assess your actual financial health.
+        Your answers stay in this page and are not sent to a server.
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>FINANCIAL CRISIS™ · NO MONEY WAS HARMED IN THE MAKING OF THIS QUIZ</footer>
+
+<script>
+const questions = [
+  {
+    title:"What's your relationship with money?",
+    subtitle:"Be honest. The imaginary bank is watching.",
+    options:[
+      ["We're best friends.","Friendship is beautiful. Unfortunately, friendship does not pay fictional rent. Your destiny is still suspicious."],
+      ["It's complicated.","Classic situationship. Money comes in, money goes out, and nobody explains the relationship status."],
+      ["Money keeps leaving me.","Your money has discovered freedom. We respect its journey. We fear your bank balance."],
+      ["I have never seen them together.","Financial mystery detected. The investigation has found zero clues and maximum drama."]
+    ]
+  },
+  {
+    title:"You see something cool online. What now?",
+    subtitle:"The shopping cart has entered the chat.",
+    options:[
+      ["I buy it immediately.","Impulse detected! The algorithm has converted one click into three paragraphs of financial fan fiction."],
+      ["I add it to my wishlist.","Delayed gratification! Unfortunately, the wishlist now has its own wishlist. The cycle continues."],
+      ["I call it an investment.","The word 'investment' has been used without supervision. Our imaginary economists are sweating."],
+      ["I close the tab, then return.","A dramatic internal debate. Twelve browser tabs and one existential crisis have been recorded."]
+    ]
+  },
+  {
+    title:"What is your savings strategy?",
+    subtitle:"Choose your preferred financial mythology.",
+    options:[
+      ["Automatic savings.","Responsible behavior detected. The algorithm has filed an appeal because it was expecting chaos."],
+      ["Whatever is left at the end.","A bold strategy based on the ancient principle of hoping for the best."],
+      ["Move money into another account.","Money has changed locations. Our fictional detective has drawn a map with absolutely no useful conclusions."],
+      ["We don't discuss savings.","The savings department has been replaced by a suspiciously large question mark."]
+    ]
+  },
+  {
+    title:"Your friend says, 'Let's split the bill.'",
+    subtitle:"A social experiment disguised as dinner.",
+    options:[
+      ["Split it fairly.","Fairness! The algorithm has discovered a functional adult and does not know what to do."],
+      ["I calculate everyone's exact share.","Precision levels are dangerously high. A spreadsheet may appear at any moment."],
+      ["I say 'I'll get you next time.'","A legendary financial phrase. Next time has been missing for several calendar years."],
+      ["I stare at the total.","The total has stared back. Neither party is prepared for this confrontation."]
+    ]
+  },
+  {
+    title:"You receive unexpected pocket money.",
+    subtitle:"The plot thickens. The wallet trembles.",
+    options:[
+      ["Save most of it.","A plot twist! Sensible decisions have entered the chat. The comedy department is reviewing this development."],
+      ["Spend some, save some.","A balanced answer. The algorithm is trying to find a dramatic way to describe moderation."],
+      ["Treat myself first.","Self-care has entered the spreadsheet. The spreadsheet has requested a day off."],
+      ["Forget where it went.","The funds have entered witness protection. No further details are available."]
+    ]
+  },
+  {
+    title:"What's your financial planning method?",
+    subtitle:"A five-year plan is optional. A dramatic answer is not.",
+    options:[
+      ["I make a budget.","A budget! The ancient scrolls predicted this event. The algorithm has become visibly uncomfortable."],
+      ["I keep it all in my head.","An impressive storage system with no backup, no search bar, and several mysterious missing files."],
+      ["I figure it out as I go.","Freestyle finance. No map, no compass, just vibes and an imaginary soundtrack."],
+      ["Future me will handle it.","Future you has been notified. Future you has left the group chat."]
+    ]
+  },
+  {
+    title:"Your bank app sends a notification.",
+    subtitle:"The suspense is completely manufactured.",
+    options:[
+      ["I check it immediately.","Responsibility has entered the building. The algorithm is searching for a loophole."],
+      ["I check it when I'm free.","A practical boundary. The fictional crisis department has escalated the matter anyway."],
+      ["I already know what it says.","Psychic banking has not been scientifically evaluated by this website."],
+      ["I turn notifications off.","Silence is golden. Our imaginary accountant is screaming into a pillow."]
+    ]
+  },
+  {
+    title:"Final question: Are you financially cooked?",
+    subtitle:"This answer changes absolutely nothing. We just wanted dramatic closure.",
+    options:[
+      ["No. I'm financially thriving.","Confidence detected. The Broke-O-Meter has entered its villain era."],
+      ["Maybe a little.","An honest assessment. Honesty has been added to the report as suspiciously reasonable behavior."],
+      ["I refuse to answer.","The right to remain silent has been acknowledged and turned into a very long paragraph."],
+      ["The economy is cooked.","A philosophical counterattack! The algorithm has temporarily stared at the ceiling."]
+    ]
+  }
+];
+
+let index = 0;
+let answers = [];
+let locked = false;
+
+const $ = id => document.getElementById(id);
+const show = id => $(id).classList.remove("hidden");
+const hide = id => $(id).classList.add("hidden");
+
+$("start").addEventListener("click", () => {
+  index = 0;
+  answers = [];
+  hide("intro");
+  hide("result");
+  show("quiz");
+  renderQuestion();
+});
+
+function renderQuestion() {
+  locked = false;
+  const q = questions[index];
+  $("qnum").textContent = `QUESTION ${String(index+1).padStart(2,"0")} / ${questions.length}`;
+  $("percent").textContent = `${Math.round(index/questions.length*100)}% ANALYZED`;
+  $("progress").style.width = `${index/questions.length*100}%`;
+  $("question").textContent = q.title;
+  $("subtitle").textContent = q.subtitle;
+  $("options").innerHTML = "";
+  $("feedback").className = "feedback";
+  $("feedback").textContent = "";
+  hide("next");
+
+  q.options.forEach((opt,i) => {
+    const button = document.createElement("button");
+    button.className = "option";
+    const letter = document.createElement("span");
+    letter.className = "letter";
+    letter.textContent = String.fromCharCode(65+i);
+    const text = document.createElement("span");
+    text.className = "optiontext";
+    text.textContent = opt[0];
+    button.append(letter,text);
+    button.addEventListener("click", () => choose(i));
+    $("options").appendChild(button);
+  });
+
+  $("ticker").textContent = [
+    "SYSTEM LOG: Financial vibes remain inconclusive...",
+    "SYSTEM LOG: Consulting absolutely nobody...",
+    "SYSTEM LOG: Generating premium-grade nonsense...",
+    "SYSTEM LOG: The calculator looks concerned..."
+  ][index%4];
+}
+
+function choose(choice) {
+  if (locked) return;
+  locked = true;
+  const q = questions[index];
+  const selected = q.options[choice];
+  answers.push({question:q.title,answer:selected[0],roast:selected[1]});
+
+  [...$("options").children].forEach((button,i) => {
+    button.disabled = true;
+    if (i===choice) {
+      button.style.borderColor = "var(--green)";
+      button.style.background = "#202719";
+    } else {
+      button.style.opacity = ".45";
+    }
+  });
+
+  $("feedback").innerHTML = "";
+  const label = document.createElement("strong");
+  label.textContent = "🤡 ANALYSIS:";
+  const explanation = document.createElement("p");
+  explanation.style.marginBottom = "0";
+  explanation.textContent = selected[1];
+  $("feedback").append(label,explanation);
+  $("feedback").classList.add("show");
+  $("ticker").textContent = "SYSTEM LOG: Answer processed. Financial doom remains inevitable.";
+  $("progress").style.width = `${(index+1)/questions.length*100}%`;
+  $("percent").textContent = `${Math.round((index+1)/questions.length*100)}% ANALYZED`;
+  $("next").textContent = index===questions.length-1
+    ? "REVEAL THE FINANCIAL DAMAGE 💀"
+    : "NEXT QUESTION →";
+  show("next");
+}
+
+$("next").addEventListener("click", () => {
+  if (!locked) return;
+  if (index < questions.length-1) {
+    index++;
+    renderQuestion();
+  } else {
+    renderResult();
+  }
+});
+
+function renderResult() {
+  hide("quiz");
+  show("result");
+  $("score").textContent = "100%";
+  $("reasons").innerHTML = "";
+
+  answers.forEach((a,i) => {
+    const item = document.createElement("div");
+    item.className = "reason";
+    const heading = document.createElement("b");
+    heading.textContent = `CASE ${String(i+1).padStart(2,"0")}: ${a.question.toUpperCase()}`;
+    const answer = document.createElement("p");
+    answer.textContent = "YOUR ANSWER: " + a.answer;
+    const roast = document.createElement("p");
+    roast.textContent = "THE ANALYSIS: " + a.roast;
+    item.append(heading,answer,roast);
+    $("reasons").appendChild(item);
+  });
+
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+$("restart").addEventListener("click", () => {
+  answers = [];
+  index = 0;
+  hide("result");
+  show("intro");
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+
+$("share").addEventListener("click", async () => {
+  const report = [
+    "💀 FINANCIAL CRISIS™ — FINANCIAL DAMAGE REPORT",
+    "BROKE-O-METER: 100% (SATIRICAL SCORE)",
+    "",
+    ...answers.map((a,i) => `${i+1}. ${a.question}\nAnswer: ${a.answer}\nAnalysis: ${a.roast}`),
+    "",
+    "FINAL VERDICT: FINANCIALLY COOKED.",
+    "This is a comedy quiz, not financial advice."
+  ].join("\n");
+
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(report);
+    } else {
+      const area = document.createElement("textarea");
+      area.value = report;
+      area.style.position = "fixed";
+      area.style.opacity = "0";
+      document.body.appendChild(area);
+      area.select();
+      const success = document.execCommand("copy");
+      area.remove();
+      if (!success) throw new Error("Copy unavailable");
+    }
+    $("share").textContent = "REPORT COPIED! GO SPREAD THE DOOM 💀";
+  } catch {
+    const area = document.createElement("textarea");
+    area.value = report;
+    area.setAttribute("readonly","");
+    area.style.width = "100%";
+    area.style.height = "180px";
+    $("reasons").appendChild(area);
+    area.focus();
+    area.select();
+    $("share").textContent = "SELECTED — COPY THE REPORT ABOVE";
+  }
+});
+</script>
+</body>
+</html>
